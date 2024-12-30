@@ -1,0 +1,3 @@
+[submodule "SwiftApp"]
+	path = SwiftApp
+	url = https://github.com/pxlin-09/SwiftApp.git

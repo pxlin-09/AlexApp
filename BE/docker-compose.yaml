@@ -1,0 +1,26 @@
+version: '3.7'
+services:
+  localstack:
+    image: localstack/localstack
+    container_name: localstack
+    environment:
+      - SERVICES=dynamodb
+      - DEBUG=1
+      - DATA_DIR=/tmp/localstack/data
+      - DISABLE_SSL=true
+    ports:
+      - "4566:4566"         
+    command: ["localstack", "start", "--no-ssl"]
+
+
+  firebase-emulator:
+    build:
+      context: ./firebase  # Build from the `firebase` subdirectory
+    container_name: firebase-emulator
+    ports:
+      - "9099:9099"  # Map the emulator port to the host
+      - "4000:4000"
+    volumes:
+      - ./firebase:/app  # Map the `firebase` folder to `/app` in the container
+    environment:
+      - FIREBASE_TOKEN=${FIREBASE_TOKEN}
